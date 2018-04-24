@@ -46,6 +46,7 @@ export default Ember.Component.extend({
     var inFlight = this.get('inFlight');
 
     if (inFlight) {
+      this.resetTimer()
       if (this.get('startDelay') > 4) {
         Ember.run.later(this, this.createSpinner, element, this.get('startDelay'));
       }else {
@@ -61,7 +62,9 @@ export default Ember.Component.extend({
       this._spinner = createSpinner(element);
       this._spinner.spin(element.querySelector('.spin-button-spinner'));
     }
+  },
 
+  resetTimer: function() {
     if (this._timer) { Ember.run.cancel(this._timer); }
 
     var timeout = this.get('defaultTimout');
